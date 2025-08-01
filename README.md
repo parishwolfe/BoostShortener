@@ -83,7 +83,7 @@ Creates a new short link. An optional `expiration` parameter (in minutes) can be
 ```json
 {
   "url": "https://example.com",
-  "expiration": 10  // Optional: number of minutes before the link expires.
+  "expiration": 10
 }
 ```
 
@@ -148,7 +148,7 @@ Fetches all short links that are active and not expired.
         "createdAt": "2023-01-01T00:00:00Z",
         "clicks": 0,
         "isActive": true,
-        "expiresAt": "2023-01-01T00:10:00Z"  // May be null if no expiration was set.
+        "expiresAt": "2023-01-01T00:10:00Z"
       }
     ]
   }
@@ -190,7 +190,7 @@ Deactivates an existing short link using its `shortCode`.
       "createdAt": "2023-01-01T00:00:00Z",
       "clicks": 0,
       "isActive": false,
-      "expiresAt": "2023-01-01T00:10:00Z"  // May be null if no expiration was set.
+      "expiresAt": "2023-01-01T00:10:00Z"
     }
   }
   ```
