@@ -3,5 +3,6 @@ CREATE TABLE short_links (
   short_code TEXT UNIQUE,
   original_url TEXT NOT NULL,
   created_at TIMESTAMP DEFAULT NOW(),
-  clicks INT DEFAULT 0
+  clicks INT DEFAULT 0,
+  is_active BOOLEAN DEFAULT TRUE
 );

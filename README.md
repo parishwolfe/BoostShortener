@@ -7,7 +7,7 @@ This project is a URL shortener built with Next.js, Prisma, and PostgreSQL. It p
 This code must be run in a docker environment to bring up both the code and the database. Ensure that you have Docker installed and running on your machine. Then run the following commands in your terminal:
 
 ```bash
-echo DATABASE_URL="postgresql://postgres:postgres@localhost:5432/boostshortener" >> .env
+echo DATABASE_URL="postgresql://postgres:postgres@db:5432/boostshortener" >> .env
 echo POSTGRES_PASSWORD="postgres" >> db/.env
 
 docker-compose up --build
