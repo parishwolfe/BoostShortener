@@ -1,7 +1,5 @@
-import { PrismaClient } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
-
-const prisma = new PrismaClient();
+import prisma from '@/db/prisma';
 
 // Convert a numeric id to a base-64 encoded string (removing any padding)
 function encodeBase64(num: number): string {
@@ -16,11 +14,14 @@ export async function POST(req: NextRequest) {
     console.log('Received body:', JSON.stringify(body));
     const { url } = body;
 
-    if (!url || typeof url !== 'string') {
+    // Use the built-in URL constructor to validate the URL.
+    try {
+      new URL(url);
+    } catch (error) {
       return NextResponse.json(
         {
           error: 'Invalid URL',
-          message: `Expected a valid URL string, but received: ${JSON.stringify(url)}`
+          message: `Provided URL is not valid: ${url}`
         },
         { status: 400 }
       );
@@ -45,7 +46,6 @@ export async function POST(req: NextRequest) {
     }
 
     // Create the record WITHOUT the shortCode so that a serial id is generated.
-    // Note: This works now because shortCode is optional.
     const created = await prisma.shortLink.create({
       data: {
         originalUrl: url,
@@ -66,6 +66,7 @@ export async function POST(req: NextRequest) {
       { shortCode, url: shortLink.originalUrl },
       { status: 201 }
     );
+    
   } catch (error: unknown) {
     console.error("Error in POST /api/shorten:", error);
     return NextResponse.json(

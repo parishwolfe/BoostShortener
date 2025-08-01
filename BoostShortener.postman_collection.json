@@ -74,7 +74,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"shortCode\": \"AAAAAw\"\n}",
+					"raw": "{\n    \"shortCode\": \"AAAAAQ\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -102,15 +102,14 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/b91d9be2-9950-4635-a3b8-5c33b5134ffd",
+					"raw": "http://localhost:3000/AAAAAQ",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "3000",
 					"path": [
-						"api",
-						"b91d9be2-9950-4635-a3b8-5c33b5134ffd"
+						"AAAAAQ"
 					]
 				}
 			},
