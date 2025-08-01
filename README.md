@@ -30,3 +30,13 @@ npm run dev
 ```
 
 This will start the application on [http://localhost:3000](http://localhost:3000) as well.
+
+## Next Steps
+
+- [ ] Implement expiration for links
+- [ ] rate limiting
+- [ ] considerations for scaling
+- [ ] CICD pipeline
+- [ ] Code quality checks
+- [ ] Documentation for API endpoints
+- [ ] Build out UI for management
