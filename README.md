@@ -20,15 +20,6 @@ Local:  [http://localhost:3000](http://localhost:3000)
 Dev: {TODO: insert dev URL once deployed}  
 Prod: {TODO: insert prod URL once deployed}
 
-## Development
-
-To start the development server locally with hot reload, you can run the following commands:
-
-```bash
-./scripts/run_dev.sh
-```
-
-This will start the application on [http://localhost:3000](http://localhost:3000) as well.
 
 ## Considerations for Scaling
 
@@ -243,12 +234,3 @@ http://localhost:3000/abc123
 - **404 Not Found**
 
   If the link is expired or inactive (or does not exist), a 404 response is generated.
-
-## Next Steps
-
-These are the next things to tackle:
-  
-- [ ] Unit Tests
-- [ ] CICD pipeline
-- [ ] Code quality checks
-- [ ] Build out UI for management

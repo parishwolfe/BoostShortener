@@ -1,4 +1,4 @@
-name: Deployment to Production Environment
+name: Deployment to Production
 
 on:
   workflow_dispatch:

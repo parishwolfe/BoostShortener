@@ -1,5 +1,4 @@
-name: Deployment to Development Environment
-
+name: Deployment to Development
 on:
   push:
     branches:
