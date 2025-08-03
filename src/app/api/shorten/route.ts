@@ -8,6 +8,13 @@ function encodeBase64(num: number): string {
   return buffer.toString('base64').replace(/=+$/, '');
 }
 
+/**
+ * API route to create a new short link.
+ * This route accepts a URL, validates it, and returns a short code.
+ *
+ * @param req - The incoming request object containing the URL.
+ * @returns A JSON response with the short code or an error message.
+ */
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();

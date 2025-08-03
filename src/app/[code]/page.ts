@@ -1,13 +1,19 @@
 import { redirect, notFound } from "next/navigation";
-import prisma from '../../../db/prisma';
+import prisma from "@/db/prisma";
 
-export default async function RedirectPage({
-  params,
-}: {
-  params: { code: string };
-}) {
-  // Await params to satisfy Next.js' dynamic route requirements.
-  const { code } = await Promise.resolve(params);
+/**
+ * Redirects to the original URL based on the short code.
+ * This function is used in the dynamic route to handle redirection.
+ *
+ * @param props - The props containing parameters from the dynamic route.
+ */
+
+type PageProps = {
+  params: Promise<{ code: string }>; // Updated type definition
+};
+
+export default async function RedirectPage({ params }: PageProps) {
+  const { code } = await params;
 
   // Look up the short link by shortCode (code)
   const link = await prisma.shortLink.findUnique({

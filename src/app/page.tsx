@@ -16,10 +16,10 @@ import {
   DialogContent,
   DialogTitle,
   IconButton,
-  Container, // Import Container from MUI
-  Typography, // Import Typography
-  CircularProgress, // Import CircularProgress
-  Box, // Import Box
+  Container,
+  Typography,
+  CircularProgress,
+  Box,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
@@ -30,6 +30,7 @@ const StyledTableCell = styled(TableCell)({
   fontWeight: 'bold',
 });
 
+// Define the ShortLink interface to match the expected data structure
 interface ShortLink {
   id: number;
   originalUrl: string;
@@ -47,6 +48,7 @@ const AdminDashboard: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // Fetch all links when the component mounts
   useEffect(() => {
     fetchAllLinks();
   }, []);
@@ -61,7 +63,7 @@ const AdminDashboard: React.FC = () => {
       }
       const data = await response.json();
       setLinks(data.links);
-    } catch (e: any) {
+    } catch (e: unknown) {
       setError('Failed to load links.');
       console.error("Failed to fetch links", e);
     } finally {
@@ -69,6 +71,7 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
+  // Function to handle deactivation of a link
   const handleDeactivate = async (shortCode: string) => {
     try {
       const response = await fetch('/api/deactivate', {
@@ -93,6 +96,7 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
+  // Function to handle creating a new short link
   const handleCreate = async () => {
     try {
       const response = await fetch('/api/shorten', {
@@ -120,9 +124,9 @@ const AdminDashboard: React.FC = () => {
       }]);
       setNewUrl('');
       setOpen(false);
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Failed to create link", error);
-      alert(`Failed to create link: ${error.message}`);
+      alert(`Failed to create link`);
     }
   };
 
@@ -134,6 +138,7 @@ const AdminDashboard: React.FC = () => {
     setOpen(false);
   };
 
+  // Show a loading spinner while fetching data
   if (loading) {
     return (
       <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '200px' }}>
@@ -146,12 +151,13 @@ const AdminDashboard: React.FC = () => {
     return <div>Error: {error}</div>;
   }
 
+  // Render the admin dashboard
   return (
     <Container sx={{ padding: '20px' }}> {/* Add padding to the main container */}
       <Typography variant="h4" component="h1" gutterBottom>
         Boost Shortener
       </Typography>
-      <Button variant="contained" startIcon={<AddIcon />} onClick={handleClickOpen} sx={{ marginBottom: '20px' }}> {/* Add margin to the button */}
+      <Button variant="contained" startIcon={<AddIcon />} onClick={handleClickOpen} sx={{ marginBottom: '20px' }}>
         Create New Link
       </Button>
 
