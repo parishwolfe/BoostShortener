@@ -1,6 +1,13 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from "@/db/prisma";
 
+/**
+ * API route to deactivate a short link by its short code.
+ * This route updates the isActive status of the link to false.
+ *
+ * @param req - The incoming request object containing the short code.
+ * @returns A JSON response indicating success or failure.
+ */
 export async function POST(req: NextRequest) {
   try {
     const { shortCode } = await req.json();

@@ -10,6 +10,9 @@ COPY . .
 # Set up Database
 RUN npx prisma generate --schema=./db/schema.prisma
 
-# Expose Port and Start Application
+# Build the application for production
+RUN npm run build
+
+# Expose Port and Start Application in production mode
 EXPOSE 3000
-CMD ["npm", "run", "dev"]
+CMD ["npm", "run", "start"]

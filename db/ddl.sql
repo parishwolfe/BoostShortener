@@ -1,3 +1,5 @@
+-- Database table structure for short links
+
 CREATE TABLE short_links (
   id SERIAL PRIMARY KEY,
   short_code TEXT UNIQUE,
