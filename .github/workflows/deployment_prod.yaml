@@ -1,0 +1,29 @@
+name: Deployment to Production Environment
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      environment:
+        type: environment
+        description: Select the deployment environment
+        default: production
+
+jobs:
+  deploy-to-dev:
+    environment:
+      name: production
+      url: http://dev.example.com # Replace with your dev environment URL
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Mock Deployment to Production
+        run: |
+          echo "Deploying to Production environment..."
+          echo "Version: ${{ github.sha }}"
+          # Add your actual deployment steps here for the dev environment
+          echo "Deployment to Production complete!"
