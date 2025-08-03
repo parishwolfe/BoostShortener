@@ -1,6 +1,14 @@
 #!/bin/bash
 set -e
 
+# Stop and remove the container if it exists.
+echo "Checking for existing container..."
+if docker ps -q -f name=boostshortener-db | grep -q .; then
+  echo "Stopping and removing existing container..."
+  docker stop boostshortener-db
+  docker rm boostshortener-db
+fi
+
 # Start the Postgres container with equivalent settings to the docker-compose file.
 echo "Starting Postgres container..."
 
@@ -20,6 +28,9 @@ sleep 10
 # Install Node dependencies.
 echo "Installing dependencies..."
 npm install
+
+# Instantiate the Prisma database.
+npx prisma generate --schema=./db/schema.prisma
 
 # Start the Next.js development server.
 echo "Starting development server..."
