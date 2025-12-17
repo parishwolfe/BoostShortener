@@ -24,6 +24,11 @@ export default async function RedirectPage({ params }: PageProps) {
     notFound();
   }
 
+  // Do not redirect if the link has expired
+  if (link.expiresAt && new Date(link.expiresAt) < new Date()) {
+    notFound();
+  }
+
   // Increment the click counter
   await prisma.shortLink.update({
     where: { shortCode: code },
