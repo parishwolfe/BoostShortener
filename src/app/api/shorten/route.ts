@@ -1,5 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import prisma from '@/db/prisma';
+import { rateLimit } from '@/lib/rate-limit';
+
+const limiter = rateLimit({
+  interval: 60 * 1000, // 60 seconds
+  uniqueTokenPerInterval: 500, // Max 500 users per second
+});
 
 // Convert a numeric id to a base-64 encoded string (removing any padding)
 function encodeBase64(num: number): string {
@@ -17,6 +23,21 @@ function encodeBase64(num: number): string {
  */
 export async function POST(req: NextRequest) {
   try {
+    // Rate Limit Check
+    // In a real app, you might use 'X-Forwarded-For' or similar from headers
+    // Here we'll use a placeholder IP or 'global' if not available for simplicity in demo
+    // NOTE: NextRequest ip accessor might behave differently locally vs deployed
+    const ip = req.ip ?? '127.0.0.1';
+    try {
+      await limiter.check(5, ip); // 5 requests per minute per IP
+    } catch {
+      return NextResponse.json(
+        { error: 'Rate Limit Exceeded' },
+        { status: 429 }
+      );
+    }
+
+
     const body = await req.json();
     console.log('Received body:', JSON.stringify(body));
     const { url } = body;
@@ -73,7 +94,7 @@ export async function POST(req: NextRequest) {
       { shortCode, url: shortLink.originalUrl },
       { status: 201 }
     );
-    
+
   } catch (error: unknown) {
     console.error("Error in POST /api/shorten:", error);
     return NextResponse.json(
